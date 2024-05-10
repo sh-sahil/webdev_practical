@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        background-color: aqua;
+      }
+
+      #form {
+        width: 300px;
+        margin: 20vh auto 0 auto;
+        padding: 20px;
+        background-color: whitesmoke;
+        font-size: 12px;
+      }
+
+      #form h1 {
+        color: black;
+        text-align: center;
+      }
+
+      #form button {
+        padding: 10px;
+        margin-top: 10px;
+        width: 100%;
+        color: white;
+        background-color: rgb(10, 41, 154);
+        border: none;
+        border-radius: 4px;
+      }
+
+      .input-control {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .input-control input {
+        border: 2px solid #f0f0f0;
+        border-radius: 4px;
+        display: block;
+        font-size: 12px;
+        padding: 10px;
+      }
+
+      .input-control input:focus {
+        outline: 0;
+      }
+
+      .input-control.success input {
+        border-color: green;
+      }
+
+      .input-control.error input {
+        border-color: red;
+      }
+
+      .input-control .error {
+        color: #ff3860;
+        font-size: 9px;
+        height: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form id="form" action="/">
+        <h1>Registration Form</h1>
+        <div class="input-control">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" />
+          <div class="error"></div>
+        </div>
+
+        <div class="input-control">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" />
+          <div class="error"></div>
+        </div>
+
+        <div class="input-control">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" />
+          <div class="error"></div>
+        </div>
+
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("form");
+      const username = document.getElementById("username");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+
+        validateInputs();
+      });
+
+      const setError = (element, message) => {
+        const inputControl = element.parentElement;
+        const errorDisplay = inputControl.querySelector(".error");
+
+        errorDisplay.innerText = message;
+        inputControl.classList.add("error");
+        inputControl.classList.remove("success");
+      };
+
+      const setSuccess = element => {
+        const inputControl = element.parentElement;
+        const errorDisplay = inputControl.querySelector(".error");
+
+        errorDisplay.innerText = "";
+        inputControl.classList.add("success");
+        inputControl.classList.remove("error");
+      };
+
+      const isValidEmail = email => {
+        const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        return re.test(String(email).toLowerCase());
+      };
+
+      const validateInputs = () => {
+        const usernameValue = username.value.trim();
+        const emailValue = email.value.trim();
+        const passwordValue = password.value.trim();
+
+        if (usernameValue === "") {
+          setError(username, "Username is required");
+        } else {
+          setSuccess(username);
+        }
+
+        if (emailValue === "") {
+          setError(email, "Email is required");
+        } else if (!isValidEmail(emailValue)) {
+          setError(email, "Provide a valid email address");
+        } else {
+          setSuccess(email);
+        }
+
+        if (passwordValue === "") {
+          setError(password, "Password is required");
+        } else if (passwordValue.length < 8) {
+          setError(password, "Password must be at least 8 character.");
+        } else {
+          setSuccess(password);
+        }
+      };
+    </script>
+  </body>
+</html>

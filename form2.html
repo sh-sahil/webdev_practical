@@ -1,0 +1,102 @@
+// HTML
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>College Registration Form</h2>
+    <form id="registrationForm">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+        <span id="usernameError"></span>
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <span id="emailError"></span>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <span id="passwordError"></span>
+      </div>
+      <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" />
+        <span id="confirmPasswordError"></span>
+      </div>
+      <div>
+        <input type="submit" value="Register" />
+      </div>
+    </form>
+
+    <div id="registrationDetails"></div>
+
+    <script>
+      const form = document.getElementById("registrationForm");
+      const usernameInput = document.getElementById("username");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const confirmPasswordInput = document.getElementById("confirmPassword");
+      const usernameError = document.getElementById("usernameError");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+      const confirmPasswordError = document.getElementById("confirmPasswordError");
+      const registrationDetails = document.getElementById("registrationDetails");
+
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+
+        let isValid = true;
+
+        // Validate username
+        if (usernameInput.value.trim() === "") {
+          usernameError.textContent = "Username is required";
+          isValid = false;
+        } else {
+          usernameError.textContent = "";
+        }
+
+        // Validate email
+        if (emailInput.value.trim() === "") {
+          emailError.textContent = "Email is required";
+          isValid = false;
+        } else if (!emailInput.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+          emailError.textContent = "Invalid email address";
+          isValid = false;
+        } else {
+          emailError.textContent = "";
+        }
+
+        // Validate password
+        if (passwordInput.value.trim() === "") {
+          passwordError.textContent = "Password is required";
+          isValid = false;
+        } else if (passwordInput.value.length < 8) {
+          passwordError.textContent = "Password must be at least 8 characters";
+          isValid = false;
+        } else {
+          passwordError.textContent = "";
+        }
+
+        // Validate confirm password
+        if (confirmPasswordInput.value.trim() === "") {
+          confirmPasswordError.textContent = "Confirm password is required";
+          isValid = false;
+        } else if (confirmPasswordInput.value !== passwordInput.value) {
+          confirmPasswordError.textContent = "Passwords do not match";
+          isValid = false;
+        } else {
+          confirmPasswordError.textContent = "";
+        }
+
+        if (isValid) {
+          // Show registration details
+          registrationDetails.textContent = `Registration successful! Your details are:
+            Username: ${usernameInput.value}
+            Email: ${emailInput.value}
+            Password: ${passwordInput.value}`;
+        }
+      });
+    </script>
+  </body>
+</html>
