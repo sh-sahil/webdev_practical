@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main">
+      <div id="box">
+        <h2 id="quebox">This is a demo question</h2>
+        <div class="row">
+          <input type="radio" class="options" value="a" name="option" />
+          <label for="options">Option 1</label>
+        </div>
+        <div class="row">
+          <input type="radio" class="options" value="b" name="option" />
+          <label for="options">Option 2</label>
+        </div>
+        <div class="row">
+          <input type="radio" class="options" value="c" name="option" />
+          <label for="options">Option 3</label>
+        </div>
+        <div class="row">
+          <input type="radio" class="options" value="d" name="option" />
+          <label for="options">Option 4</label>
+        </div>
+        <button onclick="submitQuiz()">Submit</button>
+      </div>
+    </div>
+
+    <script>
+      questions = [
+        {
+          que: "Who is Sahil?",
+          a: "sahil",
+          b: "sharma",
+          c: "koi nhi",
+          d: "no idea",
+          correct: "a",
+        },
+        {
+          que: "Who is Sahil?",
+          a: "sahil",
+          b: "sharma",
+          c: "koi nhi",
+          d: "no idea",
+          correct: "a",
+        },
+        {
+          que: "Who is Sahil?",
+          a: "sahil",
+          b: "sharma",
+          c: "koi nhi",
+          d: "no idea",
+          correct: "a",
+        },
+      ];
+
+      let index = 0;
+      const length = questions.length;
+      let right = 0;
+      let wrong = 0;
+
+      const queBox = document.getElementById("quebox");
+      const questionInputs = document.querySelectorAll(".options");
+
+      function loadQuestion() {
+        if (index == length) {
+          exitQuiz();
+        }
+
+        reset();
+        const data = questions[index];
+        queBox.innerHTML = ` ${index + 1}) ${data.que}`;
+
+        questionInputs[0].nextElementSibling.innerHTML = data.a;
+        questionInputs[1].nextElementSibling.innerHTML = data.b;
+        questionInputs[2].nextElementSibling.innerHTML = data.c;
+        questionInputs[3].nextElementSibling.innerHTML = data.d;
+      }
+
+      function submitQuiz() {
+        data = questions[index];
+        const ans = getAnswer();
+        if (ans == data.correct) {
+          right++;
+        } else {
+          wrong++;
+        }
+        index++;
+        loadQuestion();
+        return;
+      }
+
+      function getAnswer() {
+        let ans;
+        questionInputs.forEach(input => {
+          if (input.checked) {
+            ans = input.value;
+          }
+        });
+
+        return ans;
+      }
+
+      function reset() {
+        questionInputs.forEach(input => {
+          input.checked = false;
+        });
+      }
+
+      function exitQuiz() {
+        document.getElementById("box").innerHTML = `
+        <h3>Thank you for attempting the QUIZ </h3>
+        <h2> You got ${right}/${wrong} </h2>
+        
+
+        `;
+      }
+      loadQuestion();
+    </script>
+  </body>
+</html>
