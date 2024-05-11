@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            background-color: #717171;
+
+        }
+
+        #nav{
+            padding: 15px;
+           
+            height: 80px;
+            background-color: #191818;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            line-height: 50px;
+        }
+
+        .head{
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .ul{
+            width: 50%;
+        }
+
+        ul{
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        a{
+            text-decoration: none;
+            font-size: 20px;
+            color: rgb(189, 187, 187);
+        }
+
+        a:active{
+            color: white;
+        }
+
+        #main{
+            text-align: center;
+
+        }
+
+        .left{
+            
+            background-color: #1a1a1a;
+            color: white;
+            height: 250px;
+            padding: 15px ;
+            
+        }
+
+        .name{
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .job{
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .info{
+           margin: 10px;
+           font-size: 20px;
+           padding: 20px;
+
+        }
+
+        .head2{
+            font-size: 30px;
+            font-weight: bold;
+            padding: 25px;
+        }
+
+        .info2{
+            margin: 10px;
+            font-size: 20px;
+            padding-bottom: 50px;
+        }
+        .sep{
+        
+            height: 2px;
+            background-color: rgb(255, 253, 253);
+        }
+
+        #contact{
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2{
+            margin: 20px;
+        }
+
+        form input,
+      form textarea,
+      form button {
+        display: block;
+        width: 90vw;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      form button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      form button:hover {
+        background-color: #555;
+      }
+
+        #footer{
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <div class="head">
+            MyPortfolio
+        </div>
+        <div class="ul">
+            <ul>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skill">Skill</a>
+                <a href="#exp">Experience</a>
+            </ul>
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="left">
+            <div class="name">Hi,I am Presha</div>
+            <div class="job">Web Developer</div>
+            <div class="info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis, laboriosam perspiciatis temporibus vitae facere libero doloribus nesciunt reprehenderit ut vel!</div>
+        </div>
+
+        <div id="about">
+            <div class="head2">
+                About Me
+            </div>
+            <div class="info2">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+            </div>
+            <div class="sep"></div>
+        </div>
+
+        <div id="skill">
+            <div class="head2">
+                About Me
+            </div>
+            <div class="info2">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+            </div>
+            <div class="sep"></div>
+        </div>
+
+        <div id="exp">
+            <div class="head2">
+                About Me
+            </div>
+            <div class="info2">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+            </div>
+            <div class="sep"></div>
+        </div>
+
+        
+            <section id="contact" class="section">
+                <div class="container">
+                  <h2>Contact Me</h2>
+                  <form>
+                    <input type="text" placeholder="Your Name">
+                    <input type="email" placeholder="Your Email">
+                    <textarea placeholder="Your Message"></textarea>
+                    <button type="submit">Send</button>
+                  </form>
+                </div>
+              </section>
+        
+    </div>
+
+    <div id="footer">
+        <p>&copy;Copyright Presha</p>
+    </div>
+</body>
+</html>

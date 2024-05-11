@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Maths Quiz</h1>
+        <div id="quiz">
+            <div class="question" data-correct-answer="b">
+                <p>What is the value of π (pi) correct to two decimal places?</p>
+                <input type="radio" name="m1" value="a"> A) 3.14<br>
+                <input type="radio" name="m1" value="b"> B) 3.14<br>
+                <input type="radio" name="m1" value="c"> C) 3.15<br>
+            </div>
+            
+            <div class="question" data-correct-answer="c">
+                <p>What is the square root of 144?</p>
+                <input type="radio" name="m2" value="a"> A) 10<br>
+                <input type="radio" name="m2" value="b"> B) 12<br>
+                <input type="radio" name="m2" value="c"> C) 12<br>
+            </div>
+            
+           
+            
+        </div>
+        <!-- Add more questions here -->
+        
+            <button id="submit-button" onclick="checkAnswers()">Submit</button>
+            <div class="result"></div>
+            <button id="submit-button" onclick="Reset()">Reset</button>
+        
+        
+    </div>
+    <script>
+        function checkAnswers() {
+            var questions = document.querySelectorAll('.question');
+            var correctCount = 0;
+            console.log(questions.length);
+            questions.forEach(function(question) {
+                var selectedAnswer = question.querySelector('input[type="radio"]:checked');
+                if (selectedAnswer) {
+                    var correctAnswer = question.getAttribute('data-correct-answer');
+                    if (selectedAnswer.value === correctAnswer) {
+                        correctCount++;
+                    }
+                }
+            });
+            
+           
+            let count=correctCount;
+            
+            send(count);
+        }
+        function send(count) {
+            console.log(count);
+            var result=document.querySelector(".result");
+            result.innerHTML="You got "+count+" out of 2 questions correct";
+            
+        }
+       function Reset(){
+        location.reload();
+        
+       }
+        
+            
+            
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <h1>Feedback Form</h1>
+        <div class="question">
+            <p>How was the food?</p>
+            <input type="radio" name="a" value="Excellent">Excellent <br>
+            <input type="radio" name="a" value="Good">Good <br>
+            <input type="radio" name="a" value="Bad">Bad <br>
+        </div>
+        <div class="question">
+            <p>How was the ambience?</p>
+            <input type="radio" name="b" value="Excellent">Excellent <br>
+            <input type="radio" name="b" value="Good">Good <br>
+            <input type="radio" name="b" value="Bad">Bad <br>
+        </div>
+        <button type="submit" onclick="feedback()">Submit</button>
+        <div class="result"></div>
+    </div>
+    <script>
+       function feedback(){
+        var count=0;
+            var questions=document.querySelectorAll(".question");
+            questions.forEach(function(question){
+                var value=question.querySelector("input[type='radio']:checked");
+                var result=document.querySelector(".result");
+                count++;
+               
+                if (value) {
+                    result.innerHTML=result.innerHTML+"Question"+count+":"+value.value+"<br>";
+                } else {
+                    result.innerHTML=result.innerHTML+"Question"+count+":"+"No selection<br>";
+                }
+            })
+        }
+    </script>
+</body>
+</html>

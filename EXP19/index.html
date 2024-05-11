@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio with Todo List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+    section {
+        padding: 20px;
+    }
+    h2 {
+        color: #333;
+    }
+    p {
+        line-height: 1.6;
+    }
+    .button {
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+    .button:hover {
+        background-color: #555;
+    }
+    .todo-item {
+        margin-bottom: 10px;
+    }
+    .edit-button,
+    .delete-button {
+        margin-left: 10px;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>My Portfolio with Todo List</h1>
+</header>
+<section id="about">
+    <h2>About Me</h2>
+    <p>Welcome to my portfolio! I'm passionate about web development and design. I love creating beautiful and functional websites.</p>
+    <p id="aboutMessage">Click the button below to learn more about me!</p>
+    <button class="button" onclick="showMore()">Show More</button>
+</section>
+<section id="projects">
+    <h2>Projects</h2>
+    <p>Here are some of the projects I've worked on:</p>
+    <ul>
+        <li>Project 1</li>
+        <li>Project 2</li>
+        <li>Project 3</li>
+    </ul>
+</section>
+<section id="todo">
+    <h2>Todo List</h2>
+    <input type="text" id="taskInput" placeholder="Add a new task">
+    <button class="button" onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+</section>
+<script>
+    function showMore() {
+        const aboutMessage = document.getElementById('aboutMessage');
+        aboutMessage.textContent = "I'm a web developer with experience in HTML, CSS, and JavaScript. I enjoy creating responsive and user-friendly websites.";
+    }
+
+    function addTask() {
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+        const taskText = taskInput.value.trim();
+        
+        if (taskText !== '') {
+            const listItem = document.createElement('li');
+            listItem.classList.add('todo-item');
+            listItem.innerHTML = `
+                <span>${taskText}</span>
+                <button class="edit-button" onclick="editTask(this)">Edit</button>
+                <button class="delete-button" onclick="deleteTask(this)">Delete</button>
+            `;
+            taskList.appendChild(listItem);
+            taskInput.value = '';
+        }
+    }
+
+
+    function deleteTask(button) {
+        const listItem = button.parentElement;
+        listItem.remove();
+    }
+</script>
+</body>
+</html>
+In this exa

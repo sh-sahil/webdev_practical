@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form Validation</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input,
+        textarea {
+            width: 30vw;
+            border: 2px solid black;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        label {
+            margin-top: 1.5rem;
+            margin-bottom: .25rem;
+        }
+
+        textarea {
+            height: 10vh;
+            border-radius: 0;
+        }
+
+        button {
+            padding: .5rem 1.5rem;
+            background: none;
+            border-radius: 10px;
+            border: 2px solid black;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+        }
+
+        .error-message {
+            color: red;
+            margin: 0;
+            /* margin-top: 0.5rem; */
+        }
+    </style>
+</head>
+
+<body>
+    <h2 style="text-align: center; margin-top: 1rem; margin-bottom: 0; font-size: 3rem;">Registration Form</h2>
+    <form onsubmit="return submitForm(event)">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName">
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+
+        <label for="mobileNumber">Mobile Number:</label>
+        <input type="text" id="mobileNumber" name="mobileNumber">
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address"></textarea>
+
+        <button type="submit" value="Register">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var password = document.getElementById("password").value;
+            var email = document.getElementById("email").value;
+            var mobileNumber = document.getElementById("mobileNumber").value;
+            var address = document.getElementById("address").value;
+
+            removeErrorMessages();
+
+            if (!isValidName(firstName)) {
+                showErrorMessage("First name should contain alphabets and be at least 2 characters long.", "firstName");
+                return false;
+            }
+
+            if (!isValidName(lastName)) {
+                showErrorMessage("Last name should contain alphabets and be at least 2 characters long.", "lastName");
+                return false;
+            }
+
+            if (!isValidPasswordLength(password)) {
+                showErrorMessage("Password should be at least 8 characters long.", "password");
+                return false;
+            }
+
+            if (!isValidPasswordUpper(password)) {
+                showErrorMessage("Password must contain atleat one Uppercase Character.", "password");
+                return false;
+            }
+
+            if (!isValidPasswordLower(password)) {
+                showErrorMessage("Password must contain atleat one Lowercase Character.", "password");
+                return false;
+            }
+
+            if (!isValidPasswordDigit(password)) {
+                showErrorMessage("Password must contain atleat one Digit.", "password");
+                return false;
+            }
+
+            if (!isValidPasswordSpecial(password)) {
+                showErrorMessage("Password must contain atleat 1 Special Character.", "password");
+                return false;
+            }
+
+            if (!isValidEmail(email)) {
+                showErrorMessage("Invalid email format.", "email");
+                return false;
+            }
+
+            if (!isValidMobileNumber(mobileNumber)) {
+                showErrorMessage("Mobile number should contain 10 digits only.", "mobileNumber");
+                return false;
+            }
+
+            if (address.trim() === "") {
+                showErrorMessage("Address should not be empty.", "address");
+                return false;
+            }
+
+            return true;
+        }
+
+        function isValidName(name) {
+            return /^[a-zA-Z]{2,}$/.test(name);
+        }
+
+        function isValidPasswordLength(password) {
+            return password.length >= 8;
+        }
+
+        function isValidPasswordUpper(password) {
+            return /[A-Z]/.test(password);
+        }
+
+        function isValidPasswordLower(password) {
+            return /[a-z]/.test(password);
+        }
+
+        function isValidPasswordDigit(password) {
+            return /\d/.test(password);
+        }
+
+        function isValidPasswordSpecial(password) {
+            return /[^\w\s]/.test(password);
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function isValidMobileNumber(mobileNumber) {
+            return /^\d{10}$/.test(mobileNumber);
+        }
+
+        function checkValidity() {
+            var isValid = true;
+
+            var inputFields = document.querySelectorAll("input, textarea");
+            inputFields.forEach(function (inputField) {
+                if (!inputField.checkValidity()) {
+                    isValid = false;
+                    inputField.style.border = "2px solid black"
+                }
+            });
+
+            return isValid;
+        }
+
+        function showErrorMessage(message, inputId) {
+            var errorMessage = document.createElement("div");
+            errorMessage.textContent = message;
+            errorMessage.classList.add("error-message");
+
+            var inputField = document.getElementById(inputId);
+            var parent = inputField.parentNode;
+            parent.insertBefore(errorMessage, inputField.nextSibling);
+        }
+
+        function removeErrorMessages() {
+            var errorMessages = document.querySelectorAll(".error-message");
+            errorMessages.forEach(function (errorMessage) {
+                errorMessage.remove();
+            });
+        }
+
+        function submitForm(e) {
+            e.preventDefault();
+            if (checkValidity() && validateForm()) {
+                alert("Form Submitted Successfully");
+                document.getElementById("firstName").value = "";
+                document.getElementById("lastName").value = "";
+                document.getElementById("password").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("mobileNumber").value = "";
+                document.getElementById("address").value = "";
+            }
+        }
+    </script>
+</body>
+
+</html>
